@@ -1,0 +1,52 @@
+
+
+
+
+
+##############################
+# actions-runner
+##############################
+https://github.com/cu-ecen-aeld/aesd-assignments/wiki/Setting-up-Github-Actions
+
+my setup: located in home directory
+
+need to manually run it to test your uploaded code. 
+If you push your code to github, and go to Actions, it will just sit there and wait to run 
+you need to manually do  ./actions-runner/run.sh
+
+NOTE: it can be finicky... it gave me the following when I ran run.sh. 
+Failed to create a session. The runner registration has been deleted from the server, please re-configure. Runner registrations are automatically deleted for runners that have not connected to the service recently.
+Runner listener exit with terminated error, stop the service, no retry needed.
+Exiting runner...
+
+BUT a few minutes later it worked. 
+
+Docker miight be needed for some runners. check stttatus with:
+sudo systemctl is-active docker.service
+
+if not running, start it with: 
+sudo systemctl start docker
+
+##############################
+# updating actions-runner
+##############################
+
+to remove an existing runner and reuse, followng the instructions here:
+https://github.com/cu-ecen-aeld/aesd-assignments/wiki/Setting-up-Github-Actions
+
+##############################
+# Make tips
+##############################
+It appears that variables need to be declared above the targets
+Can also export a path above target. See assignment 2.
+
+When using a command line argument, the following does NOT work
+make hello_world_cc CROSS_COMPILE := aarch64-none-linux-gnu-
+
+But the below does work:
+make hello_world_cc CROSS_COMPILE=aarch64-none-linux-gnu-
+
+The rules for echo and commenting don't make sense to me
+
+Note that with the below we are essentially pulling the current PATH and anding it with our new aarch toolchain part
+export PATH := $(PATH):/home/ryan/projects/aarch64_toolchain_install_dir/install/arm-gnu-toolchain-13.3.rel1-x86_64-aarch64-none-linux-gnu/bin

@@ -1,0 +1,144 @@
+HereGoes
+
+Link about working with remotes: https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
+
+#################
+# Set SSH key as repo secret
+#################
+go to repo>settings>security>actions>add secret
+cat out the contents of a secret key on your machine and copy entire contents, then paste into secret key
+
+Keys are located:
+ryan@Ubuntu22:~$ ls -al ~/.ssh
+total 40
+drwx------  2 ryan ryan 4096 Apr  2 22:04 .
+drwxr-x--- 24 ryan ryan 4096 Apr  3 15:56 ..
+-rw-------  1 ryan ryan  464 Sep 30  2025 id_ed25519
+-rw-r--r--  1 ryan ryan  107 Sep 30  2025 id_ed25519.pub
+-rw-------  1 ryan ryan  419 Nov  8 08:55 id_rsa_aesd_nopassword
+-rw-r--r--  1 ryan ryan  107 Nov  8 08:55 id_rsa_aesd_nopassword.pub
+-rw-------  1 ryan ryan 5260 Apr  2 22:04 known_hosts
+-rw-------  1 ryan ryan 5260 Apr  2 22:04 known_hosts.old
+
+Key must be named: SSH_PRIVATE_KEY
+
+
+
+#####################
+# Assignment 4
+#####################
+
+git clone git@github.com:cu-ecen-aeld/assignment-4-ryanchallacombe.git
+
+cd assignment-4-ryanchallacombe/
+
+git remote add buildroot-assignments-base https://github.com/cu-ecen-aeld/buildroot-assignments-base
+
+git fetch buildroot-assignments-base 
+
+git merge buildroot-assignments-base/master 
+
+git submodule update --init --recursive
+
+
+
+#####################
+#	Assignment 1
+#####################
+
+git clone https://github.com/cu-ecen-aeld/assignment-1-ryanchallacombe.git
+# NOTE: This was the wrong link ....?????
+
+
+git remote add assignments-base https://github.com/cu-ecen-aeld/aesd-assignments.git
+
+git remote -v
+
+git remote set-url assignments-base https://github.com/cu-ecen-aeld/aesd-assignments.git
+
+git fetch assignments-base
+
+git merge assignments-base/master
+
+git submodule update --init --recursive
+
+# show the origin url
+git remote show origin 
+
+# or use...
+git remote -v
+
+# current output
+assignments-base	https://github.com/cu-ecen-aeld/aesd-assignments.git (fetch)
+assignments-base	https://github.com/cu-ecen-aeld/aesd-assignments.git (push)
+origin	git@github.com:cu-ecen-aeld/assignment-1-ryanchallacombe.git (fetch)
+origin	git@github.com:cu-ecen-aeld/assignment-1-ryanchallacombe.git (push)
+
+
+
+Output:
+remote origin
+  Fetch URL: git@github.com:cu-ecen-aeld/assignment-1-ryanchallacombe.git
+  Push  URL: git@github.com:cu-ecen-aeld/assignment-1-ryanchallacombe.git
+  HEAD branch: (unknown)
+  Local branch configured for 'git pull':
+    main merges with remote main
+    
+    
+# to push assignment to online repo
+    git add .
+    git commit -m "Your commit message"
+    git push origin 
+   # or sometimes
+   git push origin main
+
+#####################
+#	Assignment 2
+#####################
+
+# view origin
+git remote -v
+
+# remove current origin
+git remote remove origin
+
+# verify with this
+git remote -v
+
+# set new origin
+git remote add origin git@github.com:cu-ecen-aeld/assignment-2-ryanchallacombe.git
+
+#####################
+#	Assignment 3 part 1
+#####################
+
+# got the error below when merging
+ryan@Ubuntu22:~/projects/assignment-1-ryanchallacombe$ git merge assignments-base/assignment3-part-1
+Auto-merging conf/assignment.txt
+CONFLICT (content): Merge conflict in conf/assignment.txt
+Auto-merging student-test/assignment1/Test_validate_username.c
+Automatic merge failed; fix conflicts and then commit the result.
+
+# the file contents showed the following
+ryan@Ubuntu22:~/projects/assignment-1-ryanchallacombe$ cat conf/assignment.txt 
+<<<<<<< HEAD
+assignment2
+=======
+assignment3
+>>>>>>> assignments-base/assignment3-part-1
+
+# so I fixed the file to only say:
+ryan@Ubuntu22:~/projects/assignment-1-ryanchallacombe$ cat conf/assignment.txt 
+assignment3
+
+# then when I try to merge again i get
+ryan@Ubuntu22:~/projects/assignment-1-ryanchallacombe$ git merge assignments-base/assignment3-part-1
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict
+
+
+
+
+

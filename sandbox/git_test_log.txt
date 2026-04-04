@@ -1,0 +1,126 @@
+Run ./full-test.sh
+starting test with SKIP_BUILD="" and DO_VALIDATE=""
+Running test with user root
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Generating ;/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment1/Test_hello_Runner.c;/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment1/Test_assignment_validate_Runner.c;/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment3/Test_systemcalls_Runner.c from test/assignment1/Test_hello.c;test/assignment1/Test_assignment_validate.c;test/assignment3/Test_systemcalls.c
+-- Building executable including ;/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment1/Test_hello_Runner.c;/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment1/Test_assignment_validate_Runner.c;/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment3/Test_systemcalls_Runner.c test/assignment1/Test_hello.c;test/assignment1/Test_assignment_validate.c;test/assignment3/Test_systemcalls.c and ../examples/autotest-validate/autotest-validate.c;../examples/systemcalls/systemcalls.c
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/build
+[  7%] Building C object assignment-autotest/Unity/src/CMakeFiles/unity.dir/unity.c.o
+[ 15%] Linking C static library libunity.a
+[ 15%] Built target unity
+[ 23%] Generating ../../assignment-autotest/test/assignment1/Test_hello_Runner.c, ../../assignment-autotest/test/assignment1/Test_assignment_validate_Runner.c, ../../assignment-autotest/test/assignment3/Test_systemcalls_Runner.c, ../../assignment-autotest/test/unity_runner.c
+Test files for auto dependency generation test/assignment1/Test_hello.c test/assignment1/Test_assignment_validate.c test/assignment3/Test_systemcalls.c
+Autogenerating runner for test/assignment1/Test_hello.c
+Autogenerating runner for test/assignment1/Test_assignment_validate.c
+Autogenerating runner for test/assignment3/Test_systemcalls.c
+Autogenerating test/unity_runner.c
+[ 30%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment1/Test_hello.c.o
+[ 38%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment1/Test_assignment_validate.c.o
+[ 46%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment3/Test_systemcalls.c.o
+[ 53%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment1/Test_hello_Runner.c.o
+[ 61%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment1/Test_assignment_validate_Runner.c.o
+[ 69%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/assignment3/Test_systemcalls_Runner.c.o
+[ 76%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/__/examples/autotest-validate/autotest-validate.c.o
+[ 84%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/__/examples/systemcalls/systemcalls.c.o
+[ 92%] Building C object assignment-autotest/CMakeFiles/assignment-autotest.dir/test/unity_runner.c.o
+[100%] Linking C executable assignment-autotest
+[100%] Built target assignment-autotest
+EXECV error in do_exec: No such file or directory
+/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment1/Test_hello.c:6:test_hello:INFO: Hello!  Your unity setup is working!
+/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment1/Test_hello.c:4:test_hello:PASS
+
+-----------------------
+1 Tests 0 Failures 0 Ignored 
+OK
+  /tmp/aesd-autograder/rootfs//usr/sbin/fsfreeze -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ftpd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/httpd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/i2cdetect -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/i2cdump -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/i2cget -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/i2cset -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/i2ctransfer -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ifplugd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/inetd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/killall5 -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/loadfont -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/lpd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/mim -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/nanddump -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/nandwrite -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/nbd-client -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/nologin -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ntpd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/partprobe -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/popmaildir -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/powertop -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/rdate -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/rdev -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/readahead -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/readprofile -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/remove-shell -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/rtcwake -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/sendmail -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/setfont -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/setlogcons -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/svlogd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/telnetd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/tftpd -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ubiattach -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ubidetach -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ubimkvol -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ubirename -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ubirmvol -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ubirsvol -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/ubiupdatevol -> ../../bin/busybox
+  /tmp/aesd-autograder/rootfs//usr/sbin/udhcpd -> ../../bin/busybox
+
+
+--------------------------------------------------
+You will probably need to make your busybox binary
+setuid root to ensure all configured applets will
+work properly.
+--------------------------------------------------
+
+********* Printing working directory ********* 
+/tmp/aesd-autograder/busybox
+********* ls ********* 
+AUTHORS Config.in INSTALL LICENSE Makefile Makefile.custom Makefile.flags Makefile.help NOFORK_NOEXEC.lst NOFORK_NOEXEC.sh README TODO TODO_unicode applets applets_sh arch archival busybox busybox.links busybox_unstripped busybox_unstripped.map busybox_unstripped.out configs console-tools coreutils debianutils docs e2fsprogs editors examples findutils include init klibc-utils libbb libpwdgrp loginutils mailutils make_single_applets.sh miscutils modutils networking printutils procps qemu_multiarch_testing runit scripts selinux shell size_single_applets.sh sysklogd testsuite util-linux
+********* Printing working directory ********* 
+/tmp/aesd-autograder/rootfs
+********* ls ********* 
+bin dev etc home lib lib64 linuxrc proc sbin sys tmp usr var
+Library dependencies
+      [Requesting program interpreter: /lib/ld-linux-aarch64.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libresolv.so.2]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+Moving to starting directory /__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/finder-app
+Moving back to /tmp/aesd-autograder/rootfs
+mknod: /tmp/aesd-autograder/rootfs/dev/null: Operation not permitted
+Validation Error:manual-linux script failed with 1
+/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment3 /__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe
+/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/finder-app /__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment3 /__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe
+Kick off qemu in the background
+Wait for app to finish
+Missing initrd image at /tmp/aesd-autograder/initramfs.cpio.gz
+Validation Error:Running finder application on qemu failed with return code 124, see /tmp/aesd-autograder/serial.log for details
+Validation Error:Application timed out waiting 60 seconds for finder app execution to complete
+/__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe/assignment-autotest/test/assignment3 /__w/assignments-3-and-later-ryanchallacombe/assignments-3-and-later-ryanchallacombe
+qemu-system-aarch64: no process found
+Validation failed with error list :manual-linux script failed with 1:Running finder application on qemu failed with return code 124, see /tmp/aesd-autograder/serial.log for details:Application timed out waiting 60 seconds for finder app execution to complete
+Test of assignment assignment3 failed with rc=1
+Error: Process completed with exit code 1.
