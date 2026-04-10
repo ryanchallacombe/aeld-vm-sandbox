@@ -23,6 +23,24 @@ drwxr-x--- 24 ryan ryan 4096 Apr  3 15:56 ..
 Key must be named: SSH_PRIVATE_KEY
 
 
+#####################
+# Assignment 7 p 2
+#####################
+git clone git@github.com:cu-ecen-aeld/assignment-7-ryanchallacombe.git
+
+git remote add ldd-base https://github.com/cu-ecen-aeld/ldd3.git
+
+ryan@Ubuntu22:~/projects/assignment-7-ryanchallacombe$ git remote -v
+ldd-base  https://github.com/cu-ecen-aeld/ldd3.git (fetch)
+ldd-base  https://github.com/cu-ecen-aeld/ldd3.git (push)
+origin  git@github.com:cu-ecen-aeld/assignment-7-ryanchallacombe.git (fetch)
+origin  git@github.com:cu-ecen-aeld/assignment-7-ryanchallacombe.git (push)
+
+git fetch ldd-base
+
+git merge ldd-base/master
+
+git push origin main
 
 #####################
 # Assignment 4
