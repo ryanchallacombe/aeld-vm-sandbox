@@ -1,3 +1,78 @@
+##################################################
+# Monitor space for Buildroot build 4/10/2026
+##################################################
+## Before build
+ryan@Ubuntu22:~/projects$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           776M  1.8M  774M   1% /run
+/dev/sda3        99G   34G   60G  37% /
+tmpfs           3.8G   66M  3.8G   2% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           3.8G     0  3.8G   0% /run/qemu
+/dev/sda2       512M  6.1M  506M   2% /boot/efi
+tmpfs           776M  148K  775M   1% /run/user/1000
+/dev/sr0         51M   51M     0 100% /media/ryan/VBox_GAs_7.2.2
+ryan@Ubuntu22:~/projects$ cd assignment-5-ryanchallacombe/
+
+## after buildroot build
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           776M  1.8M  774M   1% /run
+/dev/sda3        99G   46G   48G  49% /
+tmpfs           3.8G   52M  3.8G   2% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           3.8G     0  3.8G   0% /run/qemu
+/dev/sda2       512M  6.1M  506M   2% /boot/efi
+tmpfs           776M  156K  775M   1% /run/user/1000
+/dev/sr0         51M   51M     0 100% /media/ryan/VBox_GAs_7.2.2
+
+
+
+##################################################
+# Cleanup after a6p2 Yocto build 4/10/2026
+##################################################
+ryan@Ubuntu22:~/actions-runner/_work$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           776M  1.8M  774M   1% /run
+/dev/sda3        99G   87G  7.2G  93% /
+tmpfs           3.8G  3.1M  3.8G   1% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           3.8G     0  3.8G   0% /run/qemu
+/dev/sda2       512M  6.1M  506M   2% /boot/efi
+tmpfs           776M  144K  775M   1% /run/user/1000
+/dev/sr0         51M   51M     0 100% /media/ryan/VBox_GAs_7.2.2
+ryan@Ubuntu22:~/actions-runner/_work$ du -sh
+53G
+ryan@Ubuntu22:~/actions-runner/_work$ ls -l
+total 24
+drwxrwxr-x 3 ryan ryan 4096 Apr  9 06:05 _actions
+drwxrwxr-x 3 ryan ryan 4096 Apr  2 22:28 assignment-6-ryanchallacombe
+drwxrwxr-x 3 ryan ryan 4096 Apr  8 22:25 assignments-3-and-later-ryanchallacombe
+drwxrwxr-x 3 ryan ryan 4096 Apr  2 22:28 _PipelineMapping
+drwxrwxr-x 2 ryan ryan 4096 Apr  9 06:06 _temp
+drwxrwxr-x 2 ryan ryan 4096 Apr  2 22:28 _tool
+ryan@Ubuntu22:~/actions-runner/_work$ sudo rm -rf assignment-6-ryanchallacombe/
+[sudo] password for ryan: 
+ryan@Ubuntu22:~/actions-runner/_work$ ls -l
+total 20
+drwxrwxr-x 3 ryan ryan 4096 Apr  9 06:05 _actions
+drwxrwxr-x 3 ryan ryan 4096 Apr  8 22:25 assignments-3-and-later-ryanchallacombe
+drwxrwxr-x 3 ryan ryan 4096 Apr  2 22:28 _PipelineMapping
+drwxrwxr-x 2 ryan ryan 4096 Apr  9 06:06 _temp
+drwxrwxr-x 2 ryan ryan 4096 Apr  2 22:28 _tool
+ryan@Ubuntu22:~/actions-runner/_work$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           776M  1.8M  774M   1% /run
+/dev/sda3        99G   34G   60G  37% /
+tmpfs           3.8G   46M  3.8G   2% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           3.8G     0  3.8G   0% /run/qemu
+/dev/sda2       512M  6.1M  506M   2% /boot/efi
+tmpfs           776M  148K  775M   1% /run/user/1000
+/dev/sr0         51M   51M     0 100% /media/ryan/VBox_GAs_7.2.2
+ryan@Ubuntu22:~/actions-runner/_work$ 
+
+
 ryan@Ubuntu22:~$ df -h
 Filesystem      Size  Used Avail Use% Mounted on
 tmpfs           776M  1.6M  774M   1% /run
@@ -73,48 +148,5 @@ tmpfs           3.8G     0  3.8G   0% /run/qemu
 tmpfs           776M  156K  775M   1% /run/user/1000
 /dev/sr0         51M   51M     0 100% /media/ryan/VBox_GAs_7.2.2
 
-##################################################
-# Cleanup after a6p2 Yocto build
-##################################################
-ryan@Ubuntu22:~/actions-runner/_work$ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-tmpfs           776M  1.8M  774M   1% /run
-/dev/sda3        99G   87G  7.2G  93% /
-tmpfs           3.8G  3.1M  3.8G   1% /dev/shm
-tmpfs           5.0M  4.0K  5.0M   1% /run/lock
-tmpfs           3.8G     0  3.8G   0% /run/qemu
-/dev/sda2       512M  6.1M  506M   2% /boot/efi
-tmpfs           776M  144K  775M   1% /run/user/1000
-/dev/sr0         51M   51M     0 100% /media/ryan/VBox_GAs_7.2.2
-ryan@Ubuntu22:~/actions-runner/_work$ du -sh
-53G
-ryan@Ubuntu22:~/actions-runner/_work$ ls -l
-total 24
-drwxrwxr-x 3 ryan ryan 4096 Apr  9 06:05 _actions
-drwxrwxr-x 3 ryan ryan 4096 Apr  2 22:28 assignment-6-ryanchallacombe
-drwxrwxr-x 3 ryan ryan 4096 Apr  8 22:25 assignments-3-and-later-ryanchallacombe
-drwxrwxr-x 3 ryan ryan 4096 Apr  2 22:28 _PipelineMapping
-drwxrwxr-x 2 ryan ryan 4096 Apr  9 06:06 _temp
-drwxrwxr-x 2 ryan ryan 4096 Apr  2 22:28 _tool
-ryan@Ubuntu22:~/actions-runner/_work$ sudo rm -rf assignment-6-ryanchallacombe/
-[sudo] password for ryan: 
-ryan@Ubuntu22:~/actions-runner/_work$ ls -l
-total 20
-drwxrwxr-x 3 ryan ryan 4096 Apr  9 06:05 _actions
-drwxrwxr-x 3 ryan ryan 4096 Apr  8 22:25 assignments-3-and-later-ryanchallacombe
-drwxrwxr-x 3 ryan ryan 4096 Apr  2 22:28 _PipelineMapping
-drwxrwxr-x 2 ryan ryan 4096 Apr  9 06:06 _temp
-drwxrwxr-x 2 ryan ryan 4096 Apr  2 22:28 _tool
-ryan@Ubuntu22:~/actions-runner/_work$ df -h
-Filesystem      Size  Used Avail Use% Mounted on
-tmpfs           776M  1.8M  774M   1% /run
-/dev/sda3        99G   34G   60G  37% /
-tmpfs           3.8G   46M  3.8G   2% /dev/shm
-tmpfs           5.0M  4.0K  5.0M   1% /run/lock
-tmpfs           3.8G     0  3.8G   0% /run/qemu
-/dev/sda2       512M  6.1M  506M   2% /boot/efi
-tmpfs           776M  148K  775M   1% /run/user/1000
-/dev/sr0         51M   51M     0 100% /media/ryan/VBox_GAs_7.2.2
-ryan@Ubuntu22:~/actions-runner/_work$ 
 
 

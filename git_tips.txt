@@ -42,6 +42,116 @@ git merge ldd-base/master
 
 git push origin main
 
+#####
+## in assignment 5 repo
+#####
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$  git remote add buildroot-assignments-base  https://github.com/cu-ecen-aeld/buildroot-assignments-base.git
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git fetch buildroot-assignments-base
+....... lots of text ......
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git remote -v
+buildroot-assignments-base  https://github.com/cu-ecen-aeld/buildroot-assignments-base.git (fetch)
+buildroot-assignments-base  https://github.com/cu-ecen-aeld/buildroot-assignments-base.git (push)
+origin  git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (fetch)
+origin  git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (push)
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$  git merge -X theirs buildroot-assignments-base/assignment7
+Merge made by the 'ort' strategy.
+ .github/workflows/github-actions.yml | 2 +-
+ conf/assignment.txt                  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git submodule update --init --recursive
+ Submodule 'assignment-autotest' (https://github.com/cu-ecen-5013/assignment-autotest) registered for path 'assignment-autotest'
+ Submodule 'buildroot' (https://gitlab.com/buildroot.org/buildroot/) registered for path 'buildroot'
+ Cloning into '/home/ryan/projects/assignment-5-ryanchallacombe/assignment-autotest'...
+ Cloning into '/home/ryan/projects/assignment-5-ryanchallacombe/buildroot'...
+ warning: redirecting to https://gitlab.com/buildroot.org/buildroot.git/
+ Submodule path 'assignment-autotest': checked out '83e5dfa52a482c76980e69e1f231c32a03c68910'
+ Submodule 'Unity' (https://github.com/ThrowTheSwitch/Unity.git) registered for path 'assignment-autotest/Unity'
+ Cloning into '/home/ryan/projects/assignment-5-ryanchallacombe/assignment-autotest/Unity'...
+ Submodule path 'assignment-autotest/Unity': checked out 'ae8b98e80b716eb6c627f1c98261ffe9f9d3acca'
+ Submodule path 'buildroot': checked out 'e687e3815f76c1c5ea9fb52b6558bedfe53ab117'
+
+ ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git submodule update --remote
+ Submodule path 'assignment-autotest': checked out '4d05932a4144f220914ee78a88e8ecd812d0cc45'
+ warning: redirecting to https://gitlab.com/buildroot.org/buildroot.git/
+ remote: Enumerating objects: 493, done.
+ remote: Counting objects: 100% (493/493), done.
+ remote: Compressing objects: 100% (251/251), done.
+ remote: Total 310 (delta 171), reused 118 (delta 53), pack-reused 0 (from 0)
+ Receiving objects: 100% (310/310), 126.70 KiB | 4.87 MiB/s, done.
+ Resolving deltas: 100% (171/171), completed with 90 local objects.
+ From https://gitlab.com/buildroot.org/buildroot
+    1afd1a6d4d..9f79afbfb0  master     -> origin/master
+ Submodule path 'buildroot': checked out '9f79afbfb042176dba99c51e26653523fbf58169'
+
+# Debugging Actions runner
+Actions runner fails with: 
+Run git submodule update --init --recursive
+  git submodule update --init --recursive
+  shell: sh -e {0}
+Submodule path 'assignment-autotest': checked out '83e5dfa52a482c76980e69e1f231c32a03c68910'
+fatal: Needed a single revision
+fatal: Unable to find current revision in submodule path 'buildroot'
+Error: Process completed with exit code 1.
+
+## Looking back at a4p2 we used a specific git rev of the buildroot. Instructions pasted: 
+3.  Add buildroot as a git submodule in the root of your project repository using git submodule add. If you aren't familiar with git submodules, see https://git-scm.com/book/en/v2/Git-Tools-Submodules for background.
+a. Use https://gitlab.com/buildroot.org/buildroot/ as the source
+b. Use the branch 2024.02.x as the Buildroot release to target.
+c. Be sure to git add your buildroot submodule directory from the root of your project repository and git commit to save the appropriate commit hash for the buildroot directory before running ./build.sh.
+
+## Here is the commit has / buildroot version we are on:
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git submodule status
+ 83e5dfa52a482c76980e69e1f231c32a03c68910 assignment-autotest (remotes/origin/assignment1-test-fix-2-g83e5dfa)
+ 9f79afbfb042176dba99c51e26653523fbf58169 buildroot (2026.02-499-g9f79afbfb0)
+
+
+ ## let's change the branch we are using:
+ Ref: https://stackoverflow.com/questions/1777854/how-can-i-specify-a-branch-tag-when-adding-a-git-submodule
+ Ref AI: 
+ Method 1: Using the Built-in Command (Git 2.22+)
+This is the most efficient way to update the tracking branch for a submodule. 
+Stack Overflow
+Stack Overflow
+ +1
+Set the new branch:
+Run the following command from the root of your main repository:
+git submodule set-branch -b <branch_name> <submodule_path>
+Sync and update:
+Apply the configuration change to your local environment:
+git submodule sync
+git submodule update --remote --init
+Commit the change:
+You must commit the changes to the .gitmodules file in your main repository:
+git add .gitmodules <submodule_path>
+git commit -m "Switch submodule to <branch_name> branch" 
+
+## here's the update: 
+# note buildroot url: https://gitlab.com/buildroot.org/buildroot/-/commits/2024.02.x?ref_type=heads
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ cat .gitmodules 
+[submodule "assignment-autotest"]
+  path = assignment-autotest
+  url = https://github.com/cu-ecen-5013/assignment-autotest
+[submodule "buildroot"]
+  path = buildroot
+  url = https://gitlab.com/buildroot.org/buildroot/
+  branch = 2024.02.x
+  ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git submodule update --remote
+  Submodule path 'assignment-autotest': checked out '4d05932a4144f220914ee78a88e8ecd812d0cc45'
+  warning: redirecting to https://gitlab.com/buildroot.org/buildroot.git/
+  Submodule path 'buildroot': checked out 'e687e3815f76c1c5ea9fb52b6558bedfe53ab117'
+  ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git add .gitmodules buildroot
+  ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git submodule foreach 'git branch --show-current'
+  Entering 'assignment-autotest'
+  Entering 'buildroot'
+  ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git config --file .gitmodules --get-regex branch
+  submodule.buildroot.branch 2024.02.x
+  ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git commit -m "set buildroot to 2024.02.x branch"
+  [main ce1c224] set buildroot to 2024.02.x branch
+   1 file changed, 1 insertion(+)
+  ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git push origin main
+
+
+
 #####################
 # Assignment 4
 #####################
