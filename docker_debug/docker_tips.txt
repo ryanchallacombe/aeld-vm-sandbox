@@ -1,0 +1,51 @@
+##############################
+# docker
+##############################
+https://www.coursera.org/learn/linux-system-programming-introduction-to-buildroot/discussions/weeks/2/threads/cLXtHCTGEe-c4g6J49P1cQ
+
+https://docs.docker.com/engine/security/rootless/
+
+https://github.com/cu-ecen-aeld/assignment-autotest/blob/master/README.md#setting-up-your-host
+
+https://docs.docker.com/engine/install/ubuntu/
+
+https://gist.github.com/dwalkes/2fe6016d492b92b8b8d1347bba4d17a7
+
+https://github.com/cu-ecen-aeld/aesd-assignments/wiki/Setting-up-Github-Actions
+
+reference:
+https://forums.docker.com/t/cli-switch-between-rootless-and-root-mode/141995/2
+
+other references:
+switching from rootless
+
+https://www.google.com/search?q=docker+convert+from+rootless+mode&oq=docker+convert+from+rootless+mode&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRigATIHCAUQIRigATIHCAYQIRiPAtIBCTIwNTU5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
+
+https://unix.stackexchange.com/questions/773343/how-to-uninstall-docker-rootless-without-removing-the-user
+
+##############################
+
+docker info
+
+
+docker context use default
+
+docker context use rootless
+
+sudo systemctl restart docker
+
+###############################
+https://www.coursera.org/learn/linux-system-programming-introduction-to-buildroot/discussions/weeks/2/threads/cLXtHCTGEe-c4g6J49P1cQ
+I ran into the same issue:  mknod: dev/null: Operation not permitted
+Yet my local run of full-test.sh passed. After spending hours debugging, after seeing this post from 'Alessandro Masini' I suspected my docker configuration was the issue. 
+I was running in the wrong docker context. To see the available contexts run >> docker context list
+Mine showed a 'default' and 'rootless' context. Make mknod issue resolved when I switched from rootless to default. 
+To see the currently running context run >> docker info
+Near the top of the command output it will list the context. To change context run >> docker context use <context_name>
+In my case, I did >> docker context use default
+Next, restart docker with >> sudo systemctl restart docker
+
+
+
+
+

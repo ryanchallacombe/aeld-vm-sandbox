@@ -150,7 +150,10 @@ ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ cat .gitmodules
    1 file changed, 1 insertion(+)
   ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git push origin main
 
-
+# The above did not fix the issue. Looking at a ref repo, they used the following versions of each module:
+ref repo: https://github.com/cu-ecen-aeld/assignment-5-tasifacuj/tree/master
+assignment autotest 83e5dfa52a482c76980e69e1f231c32a03c68910 from 1/14/2023
+buildroot 8dd8f39494c95aed70b23bb3af08e36dab022657
 
 #####################
 # Assignment 4
