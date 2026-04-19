@@ -22,6 +22,54 @@ drwxr-x--- 24 ryan ryan 4096 Apr  3 15:56 ..
 
 Key must be named: SSH_PRIVATE_KEY
 
+#####################
+# Assignment 8
+#####################
+# Setup
+ryan@Ubuntu22:~/projects$ git clone git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git
+
+
+ryan@Ubuntu22:~/projects$ cd assignment-5-ryanchallacombe/
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git remote rename origin assignment-5-remote
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git remote -v
+assignment-5-remote git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (fetch)
+assignment-5-remote git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (push)
+
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git remote add origin git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git remote -v
+assignment-5-remote git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (fetch)
+assignment-5-remote git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (push)
+buildroot-assignments-base  https://github.com/cu-ecen-aeld/buildroot-assignments-base.git (fetch)
+buildroot-assignments-base  https://github.com/cu-ecen-aeld/buildroot-assignments-base.git (push)
+origin  git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (fetch)
+origin  git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (push)
+
+
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git push origin main
+
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git fetch buildroot-assignments-base 
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git merge -X theirs buildroot-assignments-base/assignment8
+Merge made by the 'ort' strategy.
+ conf/assignment.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git submodule update --init --recursive
+
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ cd ../assignments-3-and-later-ryanchallacombe/
+ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git remote -v
+assignments-base  git@github.com:cu-ecen-aeld/aesd-assignments.git (fetch)
+assignments-base  git@github.com:cu-ecen-aeld/aesd-assignments.git (push)
+origin  git@github.com:cu-ecen-aeld/assignments-3-and-later-ryanchallacombe.git (fetch)
+origin  git@github.com:cu-ecen-aeld/assignments-3-and-later-ryanchallacombe.git (push)
+ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git fetch assignments-base 
+ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git merge -X theirs assignments-base/assignment8
+ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git commit ### did not need to run this according to the instuctions but i think it's ok
+On branch main
+Your branch is ahead of 'origin/main' by 5 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git submodule update --init --recursive
+
 
 #####################
 # Assignment 7 p 2
@@ -150,10 +198,10 @@ ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ cat .gitmodules
    1 file changed, 1 insertion(+)
   ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git push origin main
 
-# The above did not fix the issue. Looking at a ref repo, they used the following versions of each module:
-ref repo: https://github.com/cu-ecen-aeld/assignment-5-tasifacuj/tree/master
-assignment autotest 83e5dfa52a482c76980e69e1f231c32a03c68910 from 1/14/2023
-buildroot 8dd8f39494c95aed70b23bb3af08e36dab022657
+###########
+# SOLUTION to above issue
+###########
+delete the directory in the actions-runner/_work for this assignment. Just needed to start with a clean slate apparently.
 
 #####################
 # Assignment 4
