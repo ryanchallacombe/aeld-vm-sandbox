@@ -23,11 +23,118 @@ drwxr-x--- 24 ryan ryan 4096 Apr  3 15:56 ..
 Key must be named: SSH_PRIVATE_KEY
 
 #####################
+# Assignment 9
+#####################
+
+Starting assignment 9 setup 5/23/2026. Current issue is that assignment 5 repo and assignment 8 diverge. They should match. 
+assignment 5 and 8 match until ad5cc780e8187a1fe0c184a7ed0fe6d9e6f7e81d 'a8: updated aesdchar-module.mk with latest aesd assignments commit hash'
+assignment 5 has 1 more commit not included in 8 (0947289df76f3e739f5e74100c3fb742047cb73e)
+assignment 8 has has 2 more commits no included in 5
+
+before anything i want to clone assignment 5 (a5) just in case i mess up something. I will leave this one alone (not update it locally):
+~/projects$ mkdir backup_20260523_assignment-5-ryanchallacombe
+git clone git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe backup_20260523_assignment-5-ryanchallacombe/
+
+I want to revert the assignment 5 (a5) commit and then update the a5 repo to match 8. 
+to revert:
+git revert 0947289df76f3e739f5e74100c3fb742047cb73e
+git push assignment-5-remote
+
+This looks successful in the repo.
+Now, To update from a8:
+
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git pull origin main
+From github.com:cu-ecen-aeld/assignment-8-ryanchallacombe
+ * branch            main       -> FETCH_HEAD
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace "git config" with "git config --global" to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+ 
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git config pull.rebase false
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git pull origin main
+From github.com:cu-ecen-aeld/assignment-8-ryanchallacombe
+ * branch            main       -> FETCH_HEAD
+Merge made by the 'ort' strategy.
+ base_external/configs/aesd_qemu_defconfig       | 2 +-
+ base_external/package/aesdchar-module/Config.in | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+The 2 files that had changed look good. Now push to a5:
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git push assignment-5-remote 
+
+Now, i shouldn't have reverted the 0947289df76f3e739f5e74100c3fb742047cb73e commit. I didn't need to. Let's go to the backup repo, copy the text from the buildroot_build_instructions.md file (which had changed in the commit) into the buildroot_build_instructions.md in the a5 repo, then push the updates.
+
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ cp ~/projects/backup_20260523_assignment-5-ryanchallacombe/buildroot_build_instructions.md ~/projects/assignment-5-ryanchallacombe/buildroot_build_instructions.md
+
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git push origin main 
+Enumerating objects: 9, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 6 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 2.18 KiB | 2.18 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git
+   44f76de..08cb305  main -> main
+
+Now I believe a8 and a8 and synced. Both have commit 08cb3053d1b284e798c6c4a05fcc61f242a631eb 'Merge branch 'main' of github.com:cu-ecen-aeld/assignment-8-ryanchallacombe'. 
+
+But the buildroot_build_instructions.md updates are not there yet. To fix this i do:
+git add buildroot_build_instructions.md
+git commit -m "a8: updated buildroot_build_instructions.md"
+git push origin main 
+
+Note, this only updated a8 repo. 
+
+### This is how it works. As I do: git push origin main, a8 repo online is updated, but a8 locally is not. on the contrary, a5 locally is update with a8 online, but a5 online is out of date. So I can keep working this way, but realize this feature. 
+
+##### a9 setup instructions ##### 
+You will start with an empty project submission repository, and fill it with the content of your assignment 8 local repository using these commands on your local buildroot-assignments repository or yocto assignments repository
+1.  git remote rename origin assignment-8-remote
+2.  git remote add origin <your github classroom submission repo created with the link above>
+3.  git push origin main
+1.  Pick either the Buildroot or Yocto implementation from Assignment 8 (which are located in assignment 5 or 6 repositories respectively) to use as the basis for your assignment and push to your submission repository.  You can use either Buildroot or Yocto for this assignment.  For a buildroot implementation, use
+a.  git fetch buildroot-assignments-base
+i.  This step assumes you’ve already created the remote using git remote add buildroot-assignments-base  https://github.com/cu-ecen-aeld/buildroot-assignments-base.git in assignment 5.  If you started from a new repo you’ll need to re-run the git remote-add step before attempting to fetch.
+b.  git merge -X theirs buildroot-assignments-base/assignment9
+i.  If you notice merge conflicts during the merge step with the assignment-autotest submodule, use:
+1.  git checkout --theirs aesd-assignments/assignment9 -- assignment-autotest
+2.  git commit
+ii. git submodule update --init --recursive
+2.  Using your assignment 3 repository, complete the following steps to pull in content from the aesd-assignments repository assignment-8 branch
+a.  git fetch assignments-base
+This step assumes you’ve already created the remote using git remote add assignments-base git@github.com:cu-ecen-aeld/aesd-assignments.git in the previous assignment.  If you started from a new repo you’ll need to re-run the git remote add step before attempting to fetch.
+b. git merge -X theirs assignments-base/assignment9
+i. If you notice merge conflicts during the merge step with the assignment-autotest submodule, use:
+1. git checkout --theirs git assignments-base/assignment9 -- assignment-autotest
+2. git commit
+c. git submodule update --init --recursive
+#####
+
+
+
+#####################
 # Assignment 8
 #####################
 # Setup
 ryan@Ubuntu22:~/projects$ git clone git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git
 
+#######
+You will start with an empty project submission repository, and fill it with the content of your assignment 5 local repository using these commands on your local buildroot-assignments repository (substitute to use your assignment 6 repository if you would like to use yocto for your submission instead of buildroot.)
+1.  git remote rename origin assignment-5-remote
+2.  git remote add origin <your github classroom submission repo created with the link above>
+3.  git push origin main
+#######
 
 ryan@Ubuntu22:~/projects$ cd assignment-5-ryanchallacombe/
 ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git remote rename origin assignment-5-remote
@@ -70,6 +177,30 @@ Your branch is ahead of 'origin/main' by 5 commits.
 nothing to commit, working tree clean
 ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git submodule update --init --recursive
 
+
+# clone assignments-3-and-later-ryanchallacombe at assignment 7 part 1 branch with different folder name
+ryan@Ubuntu22:~$ cd projects/
+ryan@Ubuntu22:~/projects$ mkdir A7P1_assignments-3-and-later-ryanchallacombe
+ryan@Ubuntu22:~/projects$ git clone -b assignment-7-part-1-completed --single-branch git@github.com:cu-ecen-aeld/assignments-3-and-later-ryanchallacombe.git A7P1_assignments-3-and-later-ryanchallacombe/
+
+# So the assignment 8 repo had to be manually updated after pushing to assignment 5 repo
+# i believe this is b/c I was working in the assignment 5 local repo and I should have used: git push assignment-8-ryanchallacombe ????
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git remote -v
+assignment-5-remote	git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (fetch)
+assignment-5-remote	git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (push)
+buildroot-assignments-base	https://github.com/cu-ecen-aeld/buildroot-assignments-base.git (fetch)
+buildroot-assignments-base	https://github.com/cu-ecen-aeld/buildroot-assignments-base.git (push)
+origin	git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (fetch)
+origin	git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (push)
+
+
+ryan@Ubuntu22:~/projects/assignment-8-ryanchallacombe$ git remote -v
+origin	git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (fetch)
+origin	git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (push)
+
+# had to run these in the assignment 8 repo to update it
+git pull origin main
+git submodule update --init --recursive
 
 #####################
 # Assignment 7 p 2

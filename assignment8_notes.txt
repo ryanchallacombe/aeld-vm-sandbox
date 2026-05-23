@@ -53,10 +53,7 @@ https://github.com/cu-ecen-aeld/assignment-autotest/blob/master/test/assignment5
 .
 
 7. Follow the instructions printed on your screen when you run ./full-test.sh to test your driver implementation, and your aesdsocket native application using 
-drivertest.sh
- and 
-sockettest.sh
- against your native application from your assignment 3 repository.
+drivertest.sh and sockettest.sh against your native application from your assignment 3 repository.
 
 8. Modify your buildroot or yocto implementation in your assignment 8 repository to install updated versions of the aesd socket server application and aesdchar driver, as well as appropriate startup scripts to automatically start both driver and application.
 
@@ -67,9 +64,9 @@ sockettest.sh
 10. Tag the assignment with assignment-<assignment number>-complete once the final commit is pushed onto the respective repositories. The instructions to add a tag can be found 
 here
 
+###################################
 Steps to enable Kernel Memory Leak Detector:
-See 
-https://www.kernel.org/doc/html/latest/dev-tools/kmemleak.html
+See  https://www.kernel.org/doc/html/latest/dev-tools/kmemleak.html
  for full detail.  This is not a requirement but is helpful for validating your implementation.  Steps below are detailed for buildroot.  Yocto instructions are not provided but would require making the kernel related changes discussed below using the kernel menuconfig strategy discussed 
 here
 
@@ -132,4 +129,9 @@ Your project should contain build.sh, clean.sh, and runqemu.sh scripts which fun
 
 Prerequsites
 1. Install strace on buildroot build - DONE
-2. take snapshot of virtual machine - 
+2. take snapshot of virtual machine - DONE
+3. understand if my local_test_aesd-circular-buffer from previous assignment has mem leaks
+        I believe it does b/c I don't free anything
+        VALGRIND checks:
+        valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=/home/ryan/projects/A7P1_assignments-3-and-later-ryanchallacombe/aesd-char-driver/valgrind-out.txt ./local_test_aesd-circular-buffer
+
