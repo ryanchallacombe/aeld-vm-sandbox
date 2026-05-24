@@ -96,7 +96,23 @@ git push origin main
 
 Note, this only updated a8 repo. 
 
-### This is how it works. As I do: git push origin main, a8 repo online is updated, but a8 locally is not. on the contrary, a5 locally is update with a8 online, but a5 online is out of date. So I can keep working this way, but realize this feature. 
+### This is how it works with the a5 repo setup:
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git remote -v
+assignment-5-remote git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (fetch)
+assignment-5-remote git@github.com:cu-ecen-aeld/assignment-5-ryanchallacombe.git (push)
+buildroot-assignments-base  https://github.com/cu-ecen-aeld/buildroot-assignments-base.git (fetch)
+buildroot-assignments-base  https://github.com/cu-ecen-aeld/buildroot-assignments-base.git (push)
+origin  git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (fetch)
+origin  git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (push)
+
+ryan@Ubuntu22:~/projects/assignment-8-ryanchallacombe$ git remote -v
+origin  git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (fetch)
+origin  git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (push)
+
+As I do: git push origin main, a8 repo online is updated, but a8 locally is not. If I want to update a8 locally I would need to do a pull from origin. 
+a5 locally is up to date with a8 online, but a5 online is out of date. So I can keep working this way, but realize this feature. If I want to update 5 online I need to do git push assignment-5-remote. 
+
+After running git push assignment-5-remote, both repo's are sync'd.
 
 ##### a9 setup instructions ##### 
 You will start with an empty project submission repository, and fill it with the content of your assignment 8 local repository using these commands on your local buildroot-assignments repository or yocto assignments repository
@@ -121,6 +137,44 @@ i. If you notice merge conflicts during the merge step with the assignment-autot
 c. git submodule update --init --recursive
 #####
 
+# a8 repot
+ryan@Ubuntu22:~/projects/assignment-8-ryanchallacombe$ git pull origin main 
+ryan@Ubuntu22:~/projects/assignment-8-ryanchallacombe$ git remote rename origin assignment-8-remote
+ryan@Ubuntu22:~/projects/assignment-8-ryanchallacombe$ git remote -v
+assignment-8-remote git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (fetch)
+assignment-8-remote git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (push)
+ryan@Ubuntu22:~/projects/assignment-8-ryanchallacombe$ git remote add origin git@github.com:cu-ecen-aeld/assignment-9-ryanchallacombe.git
+ryan@Ubuntu22:~/projects/assignment-8-ryanchallacombe$ git remote -v
+assignment-8-remote git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (fetch)
+assignment-8-remote git@github.com:cu-ecen-aeld/assignment-8-ryanchallacombe.git (push)
+origin  git@github.com:cu-ecen-aeld/assignment-9-ryanchallacombe.git (fetch)
+origin  git@github.com:cu-ecen-aeld/assignment-9-ryanchallacombe.git (push)
+ryan@Ubuntu22:~/projects/assignment-8-ryanchallacombe$ git push origin main 
+
+# now assignment 9 (a9) online is sync'd with a8 locally. 
+
+# it appears that the instructions are saying to use a5 repo locally to implement a9. since a8 is the remote origin for a5 local, i can update in a5 locally then git push origin main to update the a8 remote (online) repo. 
+Then, to update a8 locally, from the a8 local dir i would do: git pull assignment-8-remote
+Then, to update a9 remote, from the a8 local dir i would do: git push origin main
+This some convoluted, but okay. I'll proceed like this.
+
+# a5 repo
+ ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git fetch buildroot-assignments-base
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git merge -X theirs buildroot-assignments-base/assignment9
+Merge made by the 'ort' strategy.
+ conf/assignment.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ryan@Ubuntu22:~/projects/assignment-5-ryanchallacombe$ git submodule update --init --recursive
+
+# a3 repo
+ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git fetch assignments-base
+ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git merge -X theirs assignments-base/assignment9
+Merge made by the 'ort' strategy.
+ aesd-char-driver/aesd_ioctl.h | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+ conf/assignment.txt           |  2 +-
+ 2 files changed, 47 insertions(+), 1 deletion(-)
+ create mode 100644 aesd-char-driver/aesd_ioctl.h
+ ryan@Ubuntu22:~/projects/assignments-3-and-later-ryanchallacombe$ git submodule update --init --recursive
 
 
 #####################
