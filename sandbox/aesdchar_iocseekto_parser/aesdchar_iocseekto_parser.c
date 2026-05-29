@@ -18,6 +18,7 @@ int main(void)
 	// Setup
 	const char* ioc_pfx ="AESDCHAR_IOCSEEKTO";
 	const char* seek1 = "AESDCHAR_IOCSEEKTO:6,7";
+	const char* seek2 = "AESDCHAR_IOCSEEKTO:8,6";
 	printf("seek1: %s\n", seek1);
 	printf("seek1[0]: %c\n", seek1[0]);
 
