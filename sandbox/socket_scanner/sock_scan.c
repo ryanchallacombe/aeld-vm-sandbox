@@ -18,9 +18,10 @@
 #include <time.h>
 
 #define TCP_PORT "4242"
+#define IP_ADDR_CHAR_COUNT	14	
 
 int try_server_connect(char *server_ip, char *tcp_port, int timeout_ms);
-//void build_ipv4_addr_array(char *pfx, int suf_start, int suf_end, char *target_ip);
+void build_ipv4_addr_array(char *pfx, int suf_start, int suf_end, char target_ip[][IP_ADDR_CHAR_COUNT+1]);
 
 /**********************************
  *	Main
@@ -30,38 +31,10 @@ int main(int argc, char *argv[])
 
 	/************************* Build list of addresses *************************/
 	char * slash_24 = "192.168.86.";
-	int suf_start = 25, suf_end = 28;
-	int pfx_count = 11, ip_char_count = 14;
-	char target_ip[suf_end - suf_start + 1][ip_char_count + 1];			// include room for null terminator
+	int suf_start = 1, suf_end = 255;
+	char target_ip[suf_end - suf_start + 1][IP_ADDR_CHAR_COUNT+1];			// include room for null terminator
 
-	//build_ipv4_addr_array(slash_24, suf_start, suf_end, target_ip);
-
-	int idx_str_count = 4;
-	char idx_str[idx_str_count];
-	for (int i = suf_start; i <= suf_end; i++) {
-		
-		if (i<10) {
-			idx_str[0] = i + '0';
-			idx_str[1] = '\0';
-		} else if (i<100) {
-			idx_str[0] = i/10 + '0';
-			//printf("idx_str[0] = %c\n", idx_str[0]);
-			idx_str[1] = (i % 10) + '0';
-			//printf("idx_str[1] = %c\n", idx_str[1]);
-			idx_str[2] = '\0';
-		} else {
-			idx_str[0] = (i / 100) + '0';
-			idx_str[1] = (i / 10) % 10 + '0';
-			idx_str[2] = (i % 10) + '0';
-			idx_str[3] = '\0';
-		}
-
-		//printf("idx_str: %s\n", idx_str);
-		strncpy(target_ip[i - suf_start], slash_24, pfx_count);
-		strncpy(target_ip[i - suf_start] + pfx_count, idx_str, idx_str_count);
-		printf("target_ip[i - suf_start]: %s\n", target_ip[i - suf_start]);
-	}
-
+	build_ipv4_addr_array(slash_24, suf_start, suf_end, target_ip);
 
 	/************************* Socket *************************/
 
@@ -181,20 +154,16 @@ int try_server_connect(char *server_ip, char *tcp_port, int timeout_ms) {
  					must include period at the end, i.e. "192.168.86."
  				int suf_start = suffix (last octet of ip addr) to START with (lowest)
  				int suf_end =  suffix (last octet of ip addr) to END with (lowest)
- *
- * 		returns:
- * 				pointer to array of null terminated ip address strings
+ 				char target_ip[][IP_ADDR_CHAR_COUNT+1]
+ * 					pointer to array of null terminated ip address strings
  * 
  *  				e.g. pfx = "192.168.86.", suf_start = 25, suf_end = 30
  					output is a pointer to array with range of ip addresses
- 					starting at "192.168.86.25" and ending with "192.168.86.30"
- *				
- */
-/*
-void build_ipv4_addr_array(char *pfx, int suf_start, int suf_end, char *target_ip) {
+ 					starting at "192.168.86.25" and ending with "192.168.86.30"			
+ ****************/
+void build_ipv4_addr_array(char *pfx, int suf_start, int suf_end, char target_ip[][IP_ADDR_CHAR_COUNT+1]) {
 
-	int pfx_count = 11, ip_char_count = 14;
-	//char target_ip[suf_end - suf_start + 1][ip_char_count + 1];			// include room for null terminator
+	int pfx_count = 11;
 
 	int idx_str_count = 4;
 	char idx_str[idx_str_count];
@@ -205,9 +174,7 @@ void build_ipv4_addr_array(char *pfx, int suf_start, int suf_end, char *target_i
 			idx_str[1] = '\0';
 		} else if (i<100) {
 			idx_str[0] = i/10 + '0';
-			//printf("idx_str[0] = %c\n", idx_str[0]);
 			idx_str[1] = (i % 10) + '0';
-			//printf("idx_str[1] = %c\n", idx_str[1]);
 			idx_str[2] = '\0';
 		} else {
 			idx_str[0] = (i / 100) + '0';
@@ -218,8 +185,7 @@ void build_ipv4_addr_array(char *pfx, int suf_start, int suf_end, char *target_i
 
 		strncpy(target_ip[i - suf_start], pfx, pfx_count);
 		strncpy(target_ip[i - suf_start] + pfx_count, idx_str, idx_str_count);
-		printf("target_ip[i - suf_start]: %s\n", target_ip[i - suf_start]);
+		//printf("target_ip[i - suf_start]: %s\n", target_ip[i - suf_start]);
 	}
 
 }
-*/
